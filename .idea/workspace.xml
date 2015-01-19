@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f61f3c12-ca06-4dc8-8f34-88aee56b70fb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/nonogramm.docx" afterPath="$PROJECT_DIR$/doc/nonogramm.docx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nono/control.py" afterPath="$PROJECT_DIR$/nono/control.py" />
     </list>
     <ignored path="nonogramm.iws" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="control.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nono/control.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5871711" vertical-offset="0" max-vertical-offset="510">
-              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.08388158" vertical-offset="0" max-vertical-offset="1190">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -358,8 +357,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/nono/control.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5871711" vertical-offset="0" max-vertical-offset="510">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.08388158" vertical-offset="0" max-vertical-offset="1190">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
