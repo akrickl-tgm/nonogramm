@@ -2,7 +2,7 @@ __author__ = 'Astrid Krickl'
 from random import *
 
 
-class Control():
+class Model():
     losung = None
     spalten = []
     zeilen = []
