@@ -3,8 +3,6 @@ from nono.view import *
 from nono.model import *
 
 
-
-
 """
 alle buttons haben 3 zustände
 -1 unbestimmt (lila?)
@@ -28,7 +26,8 @@ class Control():
         pass
 
     def losen(self):
-        pass
+        print("Bitte lösen - Button wurde gedrückt")
+
 
     def neues(self):
         """
@@ -38,4 +37,4 @@ class Control():
         View.tipszeilen = Model.getZeilen()
         # View.repaint()
                 """
-        print ("hey")
+        print ("Neustart - Button wurde gedrückt")

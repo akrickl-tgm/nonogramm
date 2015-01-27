@@ -1,7 +1,12 @@
 __author__ = 'Berkan Seckin'
 from nono.control import *
 
-
+"""
+Die VIEW Klasse ist für die Darstellung des UI mit den benötigten Daten aus dem Modell
+und die Entgegennahme von Benutzerinteraktionen zuständig.
+Sie kennt sowohl ihre Steuerung(Control.py) als auch das Modell(Model.py), dessen Daten sie präsentiert,
+ist aber nicht für die Weiterverarbeitung der vom Benutzer übergebenen Daten zuständig.
+"""
 class View():
     """
     buttons array etc
@@ -42,21 +47,20 @@ except AttributeError:
 class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geändert werden
     #KONSTRUKTOR:
     def __init__(self):
-        #access qtgui
+        #access QtGUI
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
 
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(1054, 700)
+        MainWindow.resize(900, 650)     # Größe des Hauptfensters der GUI
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
-        #MainWindow.setTabShape(QtGui.qabWidget.Rounded)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
@@ -212,7 +216,6 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget.setMidLineWidth(0)
         self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #self.tableWidget.setSizeAdjustPolicy(QtGui.QAbstractScrollArea.AdjustToContents)
         self.tableWidget.setAutoScroll(False)
         self.tableWidget.setAutoScrollMargin(16)
         self.tableWidget.setTabKeyNavigation(True)
@@ -391,7 +394,6 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget_2.setMidLineWidth(0)
         self.tableWidget_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.tableWidget_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #????? GEHT NICHT: self.tableWidget_2.setSizeAdjustPolicy(QtGui.QAbstractScrollArea.AdjustToContents)
         self.tableWidget_2.setAutoScroll(False)
         self.tableWidget_2.setAutoScrollMargin(16)
         self.tableWidget_2.setTabKeyNavigation(True)
@@ -570,7 +572,6 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget_3.setMidLineWidth(0)
         self.tableWidget_3.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.tableWidget_3.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        #????? GEHT NICHT: self.tableWidget_3.setSizeAdjustPolicy(QtGui.QAbstractScrollArea.AdjustToContents)
         self.tableWidget_3.setAutoScroll(False)
         self.tableWidget_3.setAutoScrollMargin(16)
         self.tableWidget_3.setTabKeyNavigation(True)
@@ -647,16 +648,13 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.label_2.setFont(font)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.gridLayout.addWidget(self.label_2, 3, 0, 1, 1)
-        #????? GEHT NICHT: MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1054, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuLets_play_Nonogram = QtGui.QMenu(self.menubar)
         self.menuLets_play_Nonogram.setObjectName(_fromUtf8("menuLets_play_Nonogram"))
-        #????? GEHT NICHT:MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
-        #????? GEHT NICHT: MainWindow.setStatusBar(self.statusbar)
         self.menubar.addAction(self.menuLets_play_Nonogram.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -675,9 +673,9 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.label.setText(_translate("MainWindow", "Felder offen:", None))
         self.pushButton.setText(_translate("MainWindow", "Neustart", None))
         #selber gemacht:
-        self.pushButton.clicked.connect(Control.neues(Control.test))  # neues spiel
+        self.pushButton.clicked.connect(Control.neues)  # neues spiel (printed hey)
         self.pushButton_2.setText(_translate("MainWindow", "Bitte lösen :( !", None))
-        self.pushButton.clicked.connect(Control.losen(Control.test))  # lösen
+        self.pushButton_2.clicked.connect(Control.losen)  # lösen
         self.label_2.setText(_translate("MainWindow", "Schwierigkeit:", None))
 
         self.menuLets_play_Nonogram.setTitle(_translate("MainWindow", "Lets play Nonogram", None))
