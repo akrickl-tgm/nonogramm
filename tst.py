@@ -41,7 +41,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
-        #MainWindow.setTabShape(QtGui.QTabWidget.Rounded)
+        #MainWindow.setTabShape(QtGui.qabWidget.Rounded)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
@@ -587,12 +587,17 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.gridLayout.setHorizontalSpacing(10)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.lineEdit = QtGui.QLineEdit(self.gridLayoutWidget)
+
+        self.lineEdit.setEnabled(False)
+
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
         self.lineEdit.setSizePolicy(sizePolicy)
-        self.lineEdit.setText(_fromUtf8(""))
+
+        self.lineEdit.setText(_fromUtf8("HALLO"))   #HIER WIRD TEXT gesetzt
+
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
         self.comboBox = QtGui.QComboBox(self.gridLayoutWidget)
