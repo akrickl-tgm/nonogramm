@@ -7,6 +7,8 @@ und die Entgegennahme von Benutzerinteraktionen zuständig.
 Sie kennt sowohl ihre Steuerung(Control.py) als auch das Modell(Model.py), dessen Daten sie präsentiert,
 ist aber nicht für die Weiterverarbeitung der vom Benutzer übergebenen Daten zuständig.
 """
+
+
 class View():
     """
     buttons array etc
@@ -45,12 +47,18 @@ except AttributeError:
 
 
 class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geändert werden
+    lineEdit = True
+    controller = None
+    tableWidget = None
+    comboBox = None
+
     #KONSTRUKTOR:
     def __init__(self):
         #access QtGUI
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
-
+        self.controller = Control()
+        self.controller.setView(self)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -188,22 +196,22 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(112, 118, 120))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(188, 198, 255))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(188, 198, 255))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(224, 237, 240))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -239,6 +247,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget.verticalHeader().setMinimumSectionSize(15)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
+        # self.tableWidget.cellClicked(Control.feldclicked(row, col)) # row und column wie krieg ich das ??
         self.tableWidget_2 = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget_2.setEnabled(False)
         self.tableWidget_2.setGeometry(QtCore.QRect(580, 190, 257, 406))
@@ -615,6 +624,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.lineEdit.setText(_fromUtf8("HALLO"))   #HIER WIRD TEXT gesetzt
 
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+
         self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
         self.comboBox = QtGui.QComboBox(self.gridLayoutWidget)
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
@@ -670,7 +680,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.comboBox.setItemText(2, _translate("MainWindow", "HARD/125", None))
         self.comboBox.setItemText(3, _translate("MainWindow", "EXPERT/90", None))
         self.comboBox.setItemText(4, _translate("MainWindow", "IMPOSSIBRU/50", None))
-        self.label.setText(_translate("MainWindow", "Felder offen:", None))
+        self.labelfleed = self.label.setText(_translate("MainWindow", "Felder offen:", None))
         self.pushButton.setText(_translate("MainWindow", "Neustart", None))
         #selber gemacht:
         self.pushButton.clicked.connect(Control.neues)  # neues spiel (printed hey)
@@ -680,12 +690,35 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
 
         self.menuLets_play_Nonogram.setTitle(_translate("MainWindow", "Lets play Nonogram", None))
 
+    def changeFeld(self, nr):
+        print("hey")
+        self.lineEdit.setText(nr)
+        #isitemselected
+        # item(row, column)
+
     #selber erstellte methode:
     def printTest(self):
         print("TEST")
 
-    #START:
+    def itemSelectionChanged(self):
+        print("item selected")  # funzt ned
 
+    def getLevel(self):
+        self.comboBox.currentText()
+
+    def setSpielfeld(self):
+        # self.tableWidget.set lala
+        pass
+
+    def setHintZeile(self):
+        # self.tableWidget_2.set lala
+        pass
+
+    def setHintSpalte(self):
+        # self.tableWidget_3.set lala
+        pass
+
+#START:
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     ex = Ui_MainWindow()

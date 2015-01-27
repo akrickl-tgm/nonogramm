@@ -17,19 +17,31 @@ lösen alle felder fertig einfärben
 
 
 class Control():
-    test = []
-    def feldclicked(self):
+    ansicht = None
+    mo = None
+    spielfeld = None
+    hintzeile = None
+    hintspalte = None
+
+    def __init__(self):
+        self.mo = Model()
+        self.neues(20)
+
+    def feldclicked(self, row, col):
         """
         buttonfarbe ändern, textfeld felder offen ändern
+        http://pyqt.sourceforge.net/Docs/PyQt4/qtablewidgetitem.html#isSelected
         :return:
         """
+        # self.ansicht.changeFeld(self.ansicht, "20")
         pass
 
     def losen(self):
         print("Bitte lösen - Button wurde gedrückt")
+        # self.ansicht.printTest()
+        print(View.getLevel())
 
-
-    def neues(self):
+    def neues(self, groesse):
         """
         print("TEST")
         View.spielfeld = Model.getPic(30)
@@ -37,4 +49,19 @@ class Control():
         View.tipszeilen = Model.getZeilen()
         # View.repaint()
                 """
-        print ("Neustart - Button wurde gedrückt")
+        print("Neustart - Button wurde gedrückt")
+
+
+        Model.getpic(self.mo, groesse)
+        self.spielfeld = Model.getLosung(self.mo)
+        self.hintspalte = Model.getSpalten(self.mo)
+        self.hintzeile = Model.getZeilen(self.mo)
+
+        self.ansicht.setSpielfeld(self.spielfeld)
+        self.ansicht.setHintSpalte(self.hintspalte)
+        self.ansicht.setHintZeile(self.hintzeile)
+
+
+    def setView(self, view):
+        self.ansicht = view
+        print("geklappt")
