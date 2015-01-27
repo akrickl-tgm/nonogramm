@@ -23,37 +23,36 @@ class Model():
         :return:
         """
         #spielfeld generieren mit random zahlen in einem 2d array
-        spielfeld = []
+        spielfeld = [[0 for x in range(breite)] for x in range(breite)]
         for x in range(0, breite):
-            spielfeld[x] = []
             for y in range(0, breite):
-                spielfeld[x].append(round(random()))
+                spielfeld[x][y] = round(random())
 
         self.losung = spielfeld #losung speichern
+        print(self.losung)
 
         #spielfeld auszählen nur 1er
         #zeilen auslesen & ins attribut speichern
-        self.zeilen = []
-        zahler = 0
+        self.zeilen = [[0 for x in range(breite)] for x in range(breite)]
         for x in range(0, breite):
+            zahler = 0
             for y in range(0, breite):
                 if spielfeld[x][y] == 1:
-                    ++zahler
+                    zahler += 1
                 elif spielfeld[x][y] == 0:
-                    if zahler > 0:
-                        self.zeilen.append(zahler)
-                        zahler = 0
+                    self.zeilen[x][y] = zahler
+                    zahler = 0
+
         #spalten auslesen & ins attribut speichern
-        self.spalten = []
-        zahler = 0
+        self.spalten = [[0 for x in range(breite)] for x in range(breite)]
         for x in range(0, breite):
+            zahler = 0
             for y in range(0, breite):
                 if spielfeld[y][x] == 1:
-                    ++zahler
+                    zahler += 1
                 elif spielfeld[y][x] == 0:
-                    if zahler > 0:
-                        self.spalten.append(zahler)
-                        zahler = 0
+                    self.spalten[x][y] = zahler
+                    zahler = 0
 
     def getLosung(self):
         return self.losung
@@ -63,3 +62,9 @@ class Model():
 
     def getZeilen(self):
         return self.zeilen
+
+mo = Model()
+mo.getpic(10)
+print(mo.getLosung)
+print(mo.getSpalten())
+print(mo.getZeilen())
