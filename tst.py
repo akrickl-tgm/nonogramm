@@ -665,10 +665,9 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.label_2.setText(_translate("MainWindow", "Schwierigkeit:", None))
         self.menuLets_play_Nonogram.setTitle(_translate("MainWindow", "Lets play Nonogram", None))
 
-
-    #selber erstellter methode:
+    #selber erstellte methode:
     def printTest(self):
-        print("TEST");
+        print("TEST")
 
     #START:
 

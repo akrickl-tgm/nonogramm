@@ -1,6 +1,8 @@
 __author__ = 'Astrid Krickl'
-from model import *
-from view import *
+from nono.view import *
+from nono.model import *
+
+
 
 
 """
@@ -17,6 +19,7 @@ lösen alle felder fertig einfärben
 
 
 class Control():
+    test = []
     def feldclicked(self):
         """
         buttonfarbe ändern, textfeld felder offen ändern
@@ -28,7 +31,11 @@ class Control():
         pass
 
     def neues(self):
+        """
+        print("TEST")
         View.spielfeld = Model.getPic(30)
         View.tipsspalten = Model.getSpalten()
         View.tipszeilen = Model.getZeilen()
         # View.repaint()
+                """
+        print ("hey")
