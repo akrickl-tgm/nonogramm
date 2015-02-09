@@ -26,6 +26,7 @@ class Control():
 
     def setView(self, view):
         self.ansicht = view
+        print(self.ansicht)
         print("geklappt")
 
     def feldclicked(self, row, col):
@@ -38,10 +39,9 @@ class Control():
         pass
 
     def losen(self):
-        print("Bitte lösen - Button wurde gedrückt")
-        # self.ansicht.printTest()
-        # print(self.ansicht)
-        print(self.ansicht.getLevel())
+        print("Bitte loesen - Button wurde gedrueckt")
+        print(self.ansicht)
+        #print(self.ansicht.getLevel())
 
     def neues(self):
         """
@@ -51,18 +51,16 @@ class Control():
         View.tipszeilen = Model.getZeilen()
         # View.repaint()
         """
+        self.mo.getpic(self.ansicht.getLevel())
+        self.hintspalte = self.mo.getSpalten()
+        self.hintzeile = self.mo.getZeilen()
         print(self.ansicht.getLevel())
         print("Neustart - Button wurde gedrückt")
-"""
-        Model.getpic(self.mo, groesse)
-        self.spielfeld = Model.getLosung(self.mo)
-        self.hintspalte = Model.getSpalten(self.mo)
-        self.hintzeile = Model.getZeilen(self.mo)
-
-        self.ansicht.setSpielfeld(self.spielfeld)
-        self.ansicht.setHintSpalte(self.hintspalte)
-        self.ansicht.setHintZeile(self.hintzeile)
-"""
 
 
-
+#START:
+if __name__ == '__main__':
+    app = QtGui.QApplication(sys.argv)
+    ex = Ui_MainWindow()
+    ex.show()
+    sys.exit(app.exec_())

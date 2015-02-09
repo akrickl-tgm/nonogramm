@@ -51,6 +51,8 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
+
+        self.tableWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setGeometry(QtCore.QRect(50, 190, 526, 411))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -228,6 +230,10 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget.verticalHeader().setStretchLastSection(False)
         # self.tableWidget.cellClicked(Control.feldclicked(row, col)) # row und column wie krieg ich das ??
         self.tableWidget_2 = QtGui.QTableWidget(self.centralwidget)
+
+        item = QtGui.QTableWidgetItem(_fromUtf8("seas"))
+        self.tableWidget.setItem(1, 1, item)
+
         self.tableWidget_2.setEnabled(False)
         self.tableWidget_2.setGeometry(QtCore.QRect(580, 190, 257, 406))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
