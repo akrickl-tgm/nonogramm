@@ -62,9 +62,10 @@ class Model():
 
     def getZeilen(self):
         return self.zeilen
-
+"""
 mo = Model()
 mo.getpic(10)
 print(mo.getLosung)
 print(mo.getSpalten())
 print(mo.getZeilen())
+"""

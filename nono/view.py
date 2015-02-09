@@ -1,5 +1,7 @@
 __author__ = 'Berkan Seckin'
 from nono.control import *
+from PyQt4 import QtCore, QtGui
+import sys
 
 """
 Die VIEW Klasse ist für die Darstellung des UI mit den benötigten Daten aus dem Modell
@@ -8,31 +10,8 @@ Sie kennt sowohl ihre Steuerung(Control.py) als auch das Modell(Model.py), desse
 ist aber nicht für die Weiterverarbeitung der vom Benutzer übergebenen Daten zuständig.
 """
 
-
-class View():
-    """
-    buttons array etc
-    """
-    spielfeld = []
-    tipszeilen = []  # nummern auf der seite zeilen
-    tipsspalten = []  # nummern auf der seite spalten
-
-    # button.connect(Control.feldclicked())
-
-    # -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'NonogramGUI.ui'
-#
-# Created: Tue Jan 27 10:54:36 2015
-#      by: PyQt4 UI code generator 4.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
-from PyQt4 import QtCore, QtGui
-import sys
-
 try:
-    _fromUtf8 = QtCore.QString.fromUtf8
+     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
     def _fromUtf8(s):
         return s
@@ -47,18 +26,18 @@ except AttributeError:
 
 
 class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geändert werden
-    lineEdit = True
-    controller = None
-    tableWidget = None
-    comboBox = None
 
     #KONSTRUKTOR:
+
     def __init__(self):
         #access QtGUI
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
         self.controller = Control()
         self.controller.setView(self)
+        self.spielfeld = []
+        self.tipszeilen = []  # nummern auf der seite zeilen
+        self.tipsspalten = []  # nummern auf der seite spalten
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -683,7 +662,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.labelfleed = self.label.setText(_translate("MainWindow", "Felder offen:", None))
         self.pushButton.setText(_translate("MainWindow", "Neustart", None))
         #selber gemacht:
-        self.pushButton.clicked.connect(Control.neues)  # neues spiel (printed hey)
+        self.pushButton.clicked.connect(Control.neues, 5)  # neues spiel (printed hey)
         self.pushButton_2.setText(_translate("MainWindow", "Bitte lösen :( !", None))
         self.pushButton_2.clicked.connect(Control.losen)  # lösen
         self.label_2.setText(_translate("MainWindow", "Schwierigkeit:", None))
@@ -704,7 +683,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         print("item selected")  # funzt ned
 
     def getLevel(self):
-        self.comboBox.currentText()
+        print(self.comboBox.currentText())
 
     def setSpielfeld(self):
         # self.tableWidget.set lala

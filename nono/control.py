@@ -17,15 +17,16 @@ lösen alle felder fertig einfärben
 
 
 class Control():
-    ansicht = None
-    mo = None
-    spielfeld = None
-    hintzeile = None
-    hintspalte = None
-
     def __init__(self):
         self.mo = Model()
-        self.neues(20)
+        self.spielfeld = None
+        self.hintzeile = None
+        self.hintspalte = None
+        self.ansicht = None
+
+    def setView(self, view):
+        self.ansicht = view
+        print("geklappt")
 
     def feldclicked(self, row, col):
         """
@@ -39,21 +40,19 @@ class Control():
     def losen(self):
         print("Bitte lösen - Button wurde gedrückt")
         # self.ansicht.printTest()
-        print(View.getLevel())
+        # print(self.ansicht)
+        print(self.ansicht.getLevel())
 
-    def neues(self, groesse):
+    def neues(self):
         """
         print("TEST")
-        View.spielfeld = Model.getPic(30)
+        View.spielfeld = Model.getPic(groesse)
         View.tipsspalten = Model.getSpalten()
         View.tipszeilen = Model.getZeilen()
         # View.repaint()
-                """
+        """
+        print(self.ansicht.getLevel())
         print("Neustart - Button wurde gedrückt")
-
-    def setView(self, view):
-        self.ansicht = view
-        print("geklappt")
 """
         Model.getpic(self.mo, groesse)
         self.spielfeld = Model.getLosung(self.mo)
@@ -64,3 +63,6 @@ class Control():
         self.ansicht.setHintSpalte(self.hintspalte)
         self.ansicht.setHintZeile(self.hintzeile)
 """
+
+
+
