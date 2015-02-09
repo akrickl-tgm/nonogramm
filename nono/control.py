@@ -51,7 +51,10 @@ class Control():
                 """
         print("Neustart - Button wurde gedrückt")
 
-
+    def setView(self, view):
+        self.ansicht = view
+        print("geklappt")
+"""
         Model.getpic(self.mo, groesse)
         self.spielfeld = Model.getLosung(self.mo)
         self.hintspalte = Model.getSpalten(self.mo)
@@ -60,8 +63,4 @@ class Control():
         self.ansicht.setSpielfeld(self.spielfeld)
         self.ansicht.setHintSpalte(self.hintspalte)
         self.ansicht.setHintZeile(self.hintzeile)
-
-
-    def setView(self, view):
-        self.ansicht = view
-        print("geklappt")
+"""
