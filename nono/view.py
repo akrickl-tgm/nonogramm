@@ -38,6 +38,37 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.spielfeld = []
         self.tipszeilen = []  # nummern auf der seite zeilen
         self.tipsspalten = []  # nummern auf der seite spalten
+        self.getTest()
+
+    def getTest(self):
+        mo = Model()
+        mo.getpic(15)
+
+        zeilenDaten = mo.getZeilen()
+        spaltenDaten = mo.getSpalten()
+
+        # Obere Tabelle füllen mit Daten
+        for y in range(8):
+            print("ROW: %s" % y)
+            for x in range(15):
+                item = QtGui.QTableWidgetItem("%s"%zeilenDaten[y][x])
+                print(zeilenDaten[y][x])
+                self.tableWidget_3.setItem(y, x, item)
+                if x == 14:
+                    print("ENDE ERREICHT VON DIESER ZEILE")
+                    break
+
+        # Untere Tabelle füllen mit Daten
+        for y in range(15):
+            print("ROW: %s" % y)
+            for x in range(8):
+                item = QtGui.QTableWidgetItem("%s"%zeilenDaten[y][x])
+                print(spaltenDaten[y][x])
+                self.tableWidget_2.setItem(y, x, item)
+                if x == 7:
+                    print("ENDE ERREICHT VON DIESER ZEILE")
+                    break
+
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -53,7 +84,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
 
         self.tableWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.tableWidget.setGeometry(QtCore.QRect(50, 190, 526, 411))
+        self.tableWidget.setGeometry(QtCore.QRect(50, 210, 526, 411))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -229,13 +260,14 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
         # self.tableWidget.cellClicked(Control.feldclicked(row, col)) # row und column wie krieg ich das ??
+
+
+        self.tableWidget.cellClicked.connect(self.cell_was_clicked)
+
         self.tableWidget_2 = QtGui.QTableWidget(self.centralwidget)
 
-        item = QtGui.QTableWidgetItem(_fromUtf8("seas"))
-        self.tableWidget.setItem(1, 1, item)
-
         self.tableWidget_2.setEnabled(False)
-        self.tableWidget_2.setGeometry(QtCore.QRect(580, 190, 257, 406))
+        self.tableWidget_2.setGeometry(QtCore.QRect(580, 210, 257, 406))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -413,7 +445,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget_2.verticalHeader().setStretchLastSection(False)
         self.tableWidget_3 = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget_3.setEnabled(False)
-        self.tableWidget_3.setGeometry(QtCore.QRect(50, 0, 525, 185))
+        self.tableWidget_3.setGeometry(QtCore.QRect(50, 20, 525, 185))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -705,3 +737,16 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         #um das spielfeld zum resetten
         pass
 
+
+    def cell_was_clicked(self, row, column):
+        """
+        Holt Reihe, und Spalte des ausgewählten Feldes
+
+        :param row:
+        :param column:
+        :return:
+        """
+        print("Selected: row [%s], col[%d]" % (row, column))
+        self.tableWidget.setItem(row, column, QtGui.QTableWidgetItem())
+        self.tableWidget.item(row, column).setBackground(QtGui.QColor(200,100,150))
+        self.tableWidget.item(row, column).get

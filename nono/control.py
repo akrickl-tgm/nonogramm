@@ -55,11 +55,13 @@ class Control():
     def neues(self):
         """
         print("TEST")
-        View.spielfeld = Model.getPic(groesse)
+
         View.tipsspalten = Model.getSpalten()
         View.tipszeilen = Model.getZeilen()
         # View.repaint()
+        View.spielfeld = Model.getPic(groesse)
         """
+
         # algorithmus vorbereiten
         self.mo.getpic(self.ansicht.getLevel())
         self.hintspalte = self.mo.getSpalten()
