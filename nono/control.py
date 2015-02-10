@@ -1,6 +1,7 @@
 __author__ = 'Astrid Krickl'
 from nono.view import *
 from nono.model import *
+from PyQt4 import QtGui
 
 
 """
@@ -17,31 +18,39 @@ lösen alle felder fertig einfärben
 
 
 class Control():
-    def __init__(self):
+
+    def __init__(self, view):
         self.mo = Model()
         self.spielfeld = None
         self.hintzeile = None
         self.hintspalte = None
-        self.ansicht = None
-
-    def setView(self, view):
         self.ansicht = view
-        print(self.ansicht)
-        print("geklappt")
+        self.offen = 100
 
-    def feldclicked(self, row, col):
+    def feldclicked(self, row, col, color, element):
         """
         buttonfarbe ändern, textfeld felder offen ändern
         http://pyqt.sourceforge.net/Docs/PyQt4/qtablewidgetitem.html#isSelected
+        wird auf actionlistener aufgerufen muss man noch einsetllen
         :return:
         """
-        # self.ansicht.changeFeld(self.ansicht, "20")
-        pass
+        # farbe vom feld umaender muss im controller noch ausprogrammiert werden
+        if color == 'white':
+            cl = 1
+            element.changeColor ('black')
+        elif color == 'black':
+            cl = 0
+            element.changeColor ('yellow')
+        elif color == 'yellow':
+            cl = -1
+            element.changeColor ('white')
+
+        if self.spielfeld[row][col] == cl and element != 'black':
+            self.offen -= 1
 
     def losen(self):
         print("Bitte loesen - Button wurde gedrueckt")
-        print(self.ansicht)
-        #print(self.ansicht.getLevel())
+        self.ansicht.setSpielfeld(self.spielfeld)
 
     def neues(self):
         """
@@ -51,12 +60,18 @@ class Control():
         View.tipszeilen = Model.getZeilen()
         # View.repaint()
         """
+        # algorithmus vorbereiten
         self.mo.getpic(self.ansicht.getLevel())
         self.hintspalte = self.mo.getSpalten()
         self.hintzeile = self.mo.getZeilen()
-        print(self.ansicht.getLevel())
-        print("Neustart - Button wurde gedrückt")
 
+        #Werte in die GUI einfügen und spielfeld saubern
+        self.ansicht.clearFeld()
+        self.ansicht.setHintSpalte(self.hintspalte)
+        self.ansicht.setHintZeile(self.hintzeile)
+
+        #print(self.ansicht.getLevel())
+        print("Neustart - Button wurde gedrückt")
 
 #START:
 if __name__ == '__main__':

@@ -33,8 +33,8 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         #access QtGUI
         QtGui.QWidget.__init__(self)
         self.setupUi(self)
-        self.controller = Control()
-        self.controller.setView(self)
+        # self.controller = Control()
+        # self.controller.setView(self)
         self.spielfeld = []
         self.tipszeilen = []  # nummern auf der seite zeilen
         self.tipsspalten = []  # nummern auf der seite spalten
@@ -675,15 +675,11 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
 
         self.menuLets_play_Nonogram.setTitle(_translate("MainWindow", "Lets play Nonogram", None))
 
-    def changeFeld(self, nr):
+    def changeColor(self, feld):
         print("hey")
-        self.lineEdit.setText(nr)
-        #isitemselected
-        # item(row, column)
-
-    #selber erstellte methode:
-    def printTest(self):
-        print("TEST")
+        #zum umfärben eines feldes
+        #berkan !!
+        feld.colorchange ()# bla keine ahnung von der sytax
 
     def itemSelectionChanged(self):
         print("item selected")  # funzt ned
@@ -691,21 +687,21 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
     def getLevel(self):
         print(self.comboBox.currentText())
 
-    def setSpielfeld(self):
+    def setSpielfeld(self, spielfeld):
+        #beim lösen
+        #berkan !!
         # self.tableWidget.set lala
         pass
 
-    def setHintZeile(self):
+    def setHintZeile(self, hints):
         # self.tableWidget_2.set lala
         pass
 
-    def setHintSpalte(self):
+    def setHintSpalte(self, hints):
         # self.tableWidget_3.set lala
         pass
 
-#START:
-if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    ex = Ui_MainWindow()
-    ex.show()
-    sys.exit(app.exec_())
+    def clearFeld(self):
+        #um das spielfeld zum resetten
+        pass
+
