@@ -39,6 +39,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tipszeilen = []  # nummern auf der seite zeilen
         self.tipsspalten = []  # nummern auf der seite spalten
         self.getTest()
+        self.geklickteFelder_list = []
 
     def getTest(self):
         mo = Model()
@@ -121,7 +122,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 134))
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(188, 198, 255))
@@ -746,7 +747,13 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         :param column:
         :return:
         """
-        print("Selected: row [%s], col[%d]" % (row, column))
-        self.tableWidget.setItem(row, column, QtGui.QTableWidgetItem())
-        self.tableWidget.item(row, column).setBackground(QtGui.QColor(200,100,150))
-        self.tableWidget.item(row, column).get
+        if [row, column] in self.geklickteFelder_list:
+            print("Ist schon angeklickt worden")
+
+            feld = self.tableWidget.item(row, column).setBackground(QtGui.QColor(255, 255, 255)) #weiß
+        else:
+            self.tableWidget.setItem(row, column, QtGui.QTableWidgetItem())
+            feld = self.tableWidget.item(row, column).setBackground(QtGui.QColor(81,171,255)) #blau
+            self.geklickteFelder_list.append([row, column])
+
+        print(self.geklickteFelder_list)
