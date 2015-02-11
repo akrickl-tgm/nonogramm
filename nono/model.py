@@ -3,24 +3,20 @@ from random import *
 
 
 class Model():
-    losung = None
-    spalten = []
-    zeilen = []
-    """
 
-    """
+    def __init__(self):
+        """
+        konstruktor zum setup der attribute
+        """
+        self.losung
+        self.spalten = []
+        self.zeilen = []
+
     def getpic(self, breite):
         """
-        man nimmt eine spaltenbreite (zeile = spalte)
-        dann erstellt man ein array mit der größe breite²
-        dies befüllt man mit random zahlen zwischen 0 und 1
-
-        immer 'breitenanzahl' sind eine zeile
-        und jedes 5te gehört zu der jeweiligen spalte
-        dann zählt man die 1er und speichert sie in die jeweilige reihe bzw spalte
-        und speichert die in ein 2d array (?)
+        berechnet ein neues spielfeld mit zufallszahlen und zaehlt dieses spielfeld anschließend
+        fuer die tipps aus
         :param breite: breite des spielfelds
-        :return:
         """
         #spielfeld generieren mit random zahlen in einem 2d array
         spielfeld = [[0 for x in range(breite)] for x in range(breite)]
@@ -52,8 +48,14 @@ class Model():
                 elif spielfeld[y][x] == 0:
                     self.spalten[x][y] = zahler
                     zahler = 0
+        # auszählen der felder funktioniert nicht richtig und es gehört noch sortiert und die 0er aussortiert
 
     def getOffen(self, breite):
+        """
+        zaehlt die offenen (blauen bzw 1) felder aus
+        :param breite: breite des spielfelds
+        :return: die anzahl der offenen felder
+        """
         spielfeld = self.getLosung()
         zahler = 0
         for x in range(0, breite):
@@ -64,10 +66,22 @@ class Model():
 
 
     def getLosung(self):
+        """
+        gibt die losung also das spielfeld zuruck
+        :return: array des spielfelds
+        """
         return self.losung
 
     def getSpalten(self):
+        """
+        gibt die tips der spalten zuruck
+        :return: tipps der spalten
+        """
         return self.spalten
 
     def getZeilen(self):
+        """
+        gibt die tipps der zeilen zuruck
+        :return: tipps der zeilen
+        """
         return self.zeilen

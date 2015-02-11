@@ -1,2 +1,2 @@
-__author__ = 'Asi'
-__author__ = "Seckin"
+__author__ = 'Astrid Krickl'
+__author__ = "Berkan Seckin"
