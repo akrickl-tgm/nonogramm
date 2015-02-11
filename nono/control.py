@@ -3,6 +3,7 @@ __author__ = "Berkan Seckin"
 
 from nono.model import *
 from nono.view2 import Ui_MainWindow
+from nono.MyMessage import Dialog
 from PyQt4 import QtGui, QtCore
 import sys
 
@@ -54,6 +55,7 @@ class Spiel(QtGui.QMainWindow):
         # attribute
         self.geklickteFelder_list = []
         self.felderoffen
+        self.dia = None
 
     def cell_was_clicked(self, row, column):
         """
@@ -88,6 +90,14 @@ class Spiel(QtGui.QMainWindow):
             self.felderoffen += 1
         self.ui.lineEdit.setText("%s" % self.felderoffen)
 
+        if self.felderoffen == 0:
+            #you won
+            self.dia = Dialog()
+            self.dia.setGeometry(QtGui.QRect(100, 100, 400, 200))
+            self.dia.show()
+            self.ui.tableWidget.setEnabled(False)
+
+
     def handlenew(self):
         """
         handling fuer den neues spiel button
@@ -104,7 +114,7 @@ class Spiel(QtGui.QMainWindow):
         for y in range(15):
            for x in range(15):
                self.ui.tableWidget.setItem(y, x, QtGui.QTableWidgetItem())
-               feld = self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(255, 255, 135))
+               self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(255, 255, 135))
 
         # um die groesse des gewünschten spielfelds zu ermitteln
         # 0 easy - 1 medium - 2 hard - 3 impossible
@@ -122,7 +132,7 @@ class Spiel(QtGui.QMainWindow):
         for y in range(15):
            for x in range(15):
                self.ui.tableWidget.setItem(y, x, QtGui.QTableWidgetItem())
-               feld = self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(255, 255, 135))
+               self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(255, 255, 135))
 
         for y in range(15):
             for x in range(15):
