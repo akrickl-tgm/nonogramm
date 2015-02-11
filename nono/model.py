@@ -29,7 +29,6 @@ class Model():
                 spielfeld[x][y] = round(random())
 
         self.losung = spielfeld #losung speichern
-        print(self.losung)
 
         #spielfeld auszählen nur 1er
         #zeilen auslesen & ins attribut speichern
@@ -54,6 +53,16 @@ class Model():
                     self.spalten[x][y] = zahler
                     zahler = 0
 
+    def getOffen(self, breite):
+        spielfeld = self.getLosung()
+        zahler = 0
+        for x in range(0, breite):
+            for y in range(0, breite):
+                if spielfeld[y][x] == 1:
+                    zahler += 1
+        return zahler
+
+
     def getLosung(self):
         return self.losung
 
@@ -62,10 +71,3 @@ class Model():
 
     def getZeilen(self):
         return self.zeilen
-
-"""mo = Model()
-mo.getpic(15)
-print(mo.getLosung)
-print(mo.getSpalten())
-print(mo.getZeilen())
-"""

@@ -1,17 +1,16 @@
-__author__ = 'Berkan Seckin'
-from nono.control import *
-from PyQt4 import QtCore, QtGui
-import sys
+# -*- coding: utf-8 -*-
 
-"""
-Die VIEW Klasse ist für die Darstellung des UI mit den benötigten Daten aus dem Modell
-und die Entgegennahme von Benutzerinteraktionen zuständig.
-Sie kennt sowohl ihre Steuerung(Control.py) als auch das Modell(Model.py), dessen Daten sie präsentiert,
-ist aber nicht für die Weiterverarbeitung der vom Benutzer übergebenen Daten zuständig.
-"""
+# Form implementation generated from reading ui file 'C:\Users\Asi\PycharmProjects\nonogramm\NonogramGUI.ui'
+#
+# Created: Wed Feb 11 15:19:09 2015
+#      by: PyQt4 UI code generator 4.11.3
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
 
 try:
-     _fromUtf8 = QtCore.QString.fromUtf8
+    _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
     def _fromUtf8(s):
         return s
@@ -24,68 +23,21 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
-class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geändert werden
-
-    #KONSTRUKTOR:
-
-    def __init__(self):
-        #access QtGUI
-        QtGui.QWidget.__init__(self)
-        self.setupUi(self)
-        # self.controller = Control()
-        # self.controller.setView(self)
-        self.spielfeld = []
-        self.tipszeilen = []  # nummern auf der seite zeilen
-        self.tipsspalten = []  # nummern auf der seite spalten
-        self.getTest()
-        self.geklickteFelder_list = []
-
-    def getTest(self):
-        mo = Model()
-        mo.getpic(15)
-
-        zeilenDaten = mo.getZeilen()
-        spaltenDaten = mo.getSpalten()
-
-        # Obere Tabelle füllen mit Daten
-        for y in range(8):
-            print("ROW: %s" % y)
-            for x in range(15):
-                item = QtGui.QTableWidgetItem("%s"%zeilenDaten[y][x])
-                print(zeilenDaten[y][x])
-                self.tableWidget_3.setItem(y, x, item)
-                if x == 14:
-                    print("ENDE ERREICHT VON DIESER ZEILE")
-                    break
-
-        # Untere Tabelle füllen mit Daten
-        for y in range(15):
-            print("ROW: %s" % y)
-            for x in range(8):
-                item = QtGui.QTableWidgetItem("%s"%zeilenDaten[y][x])
-                print(spaltenDaten[y][x])
-                self.tableWidget_2.setItem(y, x, item)
-                if x == 7:
-                    print("ENDE ERREICHT VON DIESER ZEILE")
-                    break
-
-
+class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(900, 650)     # Größe des Hauptfensters der GUI
+        MainWindow.resize(1054, 700)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setLayoutDirection(QtCore.Qt.LeftToRight)
+        MainWindow.setTabShape(QtGui.QTabWidget.Rounded)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.tableWidget = QtGui.QTableWidget(self.centralwidget)
-
-        self.tableWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.tableWidget.setGeometry(QtCore.QRect(50, 210, 526, 411))
+        self.tableWidget.setGeometry(QtCore.QRect(50, 190, 526, 411))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -122,7 +74,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 134))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(188, 198, 255))
@@ -209,22 +161,22 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.BrightText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush = QtGui.QBrush(QtGui.QColor(112, 118, 120))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush = QtGui.QBrush(QtGui.QColor(188, 198, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush = QtGui.QBrush(QtGui.QColor(188, 198, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush = QtGui.QBrush(QtGui.QColor(224, 237, 240))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -237,6 +189,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget.setMidLineWidth(0)
         self.tableWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        #self.tableWidget.setSizeAdjustPolicy(QtGui.QAbstractScrollArea.AdjustToContents)
         self.tableWidget.setAutoScroll(False)
         self.tableWidget.setAutoScrollMargin(16)
         self.tableWidget.setTabKeyNavigation(True)
@@ -260,15 +213,9 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget.verticalHeader().setMinimumSectionSize(15)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
-        # self.tableWidget.cellClicked(Control.feldclicked(row, col)) # row und column wie krieg ich das ??
-
-
-        self.tableWidget.cellClicked.connect(self.cell_was_clicked)
-
         self.tableWidget_2 = QtGui.QTableWidget(self.centralwidget)
-
         self.tableWidget_2.setEnabled(False)
-        self.tableWidget_2.setGeometry(QtCore.QRect(580, 210, 257, 406))
+        self.tableWidget_2.setGeometry(QtCore.QRect(580, 190, 257, 406))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -421,6 +368,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget_2.setMidLineWidth(0)
         self.tableWidget_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.tableWidget_2.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        #self.tableWidget_2.setSizeAdjustPolicy(QtGui.QAbstractScrollArea.AdjustToContents)
         self.tableWidget_2.setAutoScroll(False)
         self.tableWidget_2.setAutoScrollMargin(16)
         self.tableWidget_2.setTabKeyNavigation(True)
@@ -446,7 +394,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget_2.verticalHeader().setStretchLastSection(False)
         self.tableWidget_3 = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget_3.setEnabled(False)
-        self.tableWidget_3.setGeometry(QtCore.QRect(50, 20, 525, 185))
+        self.tableWidget_3.setGeometry(QtCore.QRect(50, 0, 525, 185))
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -599,6 +547,7 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.tableWidget_3.setMidLineWidth(0)
         self.tableWidget_3.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.tableWidget_3.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        #self.tableWidget_3.setSizeAdjustPolicy(QtGui.QAbstractScrollArea.AdjustToContents)
         self.tableWidget_3.setAutoScroll(False)
         self.tableWidget_3.setAutoScrollMargin(16)
         self.tableWidget_3.setTabKeyNavigation(True)
@@ -630,19 +579,13 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.gridLayout.setHorizontalSpacing(10)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.lineEdit = QtGui.QLineEdit(self.gridLayoutWidget)
-
-        self.lineEdit.setEnabled(False)
-
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineEdit.sizePolicy().hasHeightForWidth())
         self.lineEdit.setSizePolicy(sizePolicy)
-
-        self.lineEdit.setText(_fromUtf8("HALLO"))   #HIER WIRD TEXT gesetzt
-
+        self.lineEdit.setText(_fromUtf8(""))
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
-
         self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
         self.comboBox = QtGui.QComboBox(self.gridLayoutWidget)
         self.comboBox.setObjectName(_fromUtf8("comboBox"))
@@ -676,13 +619,16 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.label_2.setFont(font)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.gridLayout.addWidget(self.label_2, 3, 0, 1, 1)
+        MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1054, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuLets_play_Nonogram = QtGui.QMenu(self.menubar)
         self.menuLets_play_Nonogram.setObjectName(_fromUtf8("menuLets_play_Nonogram"))
+        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
+        MainWindow.setStatusBar(self.statusbar)
         self.menubar.addAction(self.menuLets_play_Nonogram.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -698,62 +644,9 @@ class Ui_MainWindow(QtGui.QWidget): #im Parameter war object => falsch muss geä
         self.comboBox.setItemText(2, _translate("MainWindow", "HARD/125", None))
         self.comboBox.setItemText(3, _translate("MainWindow", "EXPERT/90", None))
         self.comboBox.setItemText(4, _translate("MainWindow", "IMPOSSIBRU/50", None))
-        self.labelfleed = self.label.setText(_translate("MainWindow", "Felder offen:", None))
+        self.label.setText(_translate("MainWindow", "Felder offen:", None))
         self.pushButton.setText(_translate("MainWindow", "Neustart", None))
-        #selber gemacht:
-        self.pushButton.clicked.connect(Control.neues, 5)  # neues spiel (printed hey)
         self.pushButton_2.setText(_translate("MainWindow", "Bitte lösen :( !", None))
-        self.pushButton_2.clicked.connect(Control.losen)  # lösen
         self.label_2.setText(_translate("MainWindow", "Schwierigkeit:", None))
-
         self.menuLets_play_Nonogram.setTitle(_translate("MainWindow", "Lets play Nonogram", None))
 
-    def changeColor(self, feld):
-        print("hey")
-        #zum umfärben eines feldes
-        #berkan !!
-        feld.colorchange ()# bla keine ahnung von der sytax
-
-    def itemSelectionChanged(self):
-        print("item selected")  # funzt ned
-
-    def getLevel(self):
-        print(self.comboBox.currentText())
-
-    def setSpielfeld(self, spielfeld):
-        #beim lösen
-        #berkan !!
-        # self.tableWidget.set lala
-        pass
-
-    def setHintZeile(self, hints):
-        # self.tableWidget_2.set lala
-        pass
-
-    def setHintSpalte(self, hints):
-        # self.tableWidget_3.set lala
-        pass
-
-    def clearFeld(self):
-        #um das spielfeld zum resetten
-        pass
-
-
-    def cell_was_clicked(self, row, column):
-        """
-        Holt Reihe, und Spalte des ausgewählten Feldes
-
-        :param row:
-        :param column:
-        :return:
-        """
-        if [row, column] in self.geklickteFelder_list:
-            print("Ist schon angeklickt worden")
-
-            feld = self.tableWidget.item(row, column).setBackground(QtGui.QColor(255, 255, 255)) #weiß
-        else:
-            self.tableWidget.setItem(row, column, QtGui.QTableWidgetItem())
-            feld = self.tableWidget.item(row, column).setBackground(QtGui.QColor(81,171,255)) #blau
-            self.geklickteFelder_list.append([row, column])
-
-        print(self.geklickteFelder_list)

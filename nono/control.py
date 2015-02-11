@@ -1,83 +1,127 @@
 __author__ = 'Astrid Krickl'
-from nono.view import *
+#from nono.view import *
 from nono.model import *
-from PyQt4 import QtGui
+from nono.view2 import Ui_MainWindow
+from PyQt4 import QtGui, QtCore
+
+import sys
+
+try:
+     _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 
-"""
-alle buttons haben 3 zustände
--1 unbestimmt (lila?)
-0 weiss
-1 schwarz
+class Spiel(QtGui.QMainWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
 
-wenn man auf ein feld drauf klickt kommt man von lila zu weiss und dann zu schwarz und dann wieder zu lila ....
-textfeld felder offen zeigt anzahl der lila felder an + falsch angekreuzte (wird nach jdm klick gechekt)
-neustart alles löschen neues puzzle generieren
-lösen alle felder fertig einfärben
-"""
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
 
+        self.ui.pushButton.clicked.connect(self.handlenew)
+        self.ui.pushButton_2.clicked.connect(self.handlesolution)
 
-class Control():
+        self.ui.tableWidget.cellClicked.connect(self.cell_was_clicked)
 
-    def __init__(self, view):
+        self.ui.lineEdit.setText(_fromUtf8("new"))
+
         self.mo = Model()
-        self.spielfeld = None
-        self.hintzeile = None
-        self.hintspalte = None
-        self.ansicht = view
-        self.offen = 100
+        self.handlenew()
 
-    def feldclicked(self, row, col, color, element):
-        """
-        buttonfarbe ändern, textfeld felder offen ändern
-        http://pyqt.sourceforge.net/Docs/PyQt4/qtablewidgetitem.html#isSelected
-        wird auf actionlistener aufgerufen muss man noch einsetllen
-        :return:
-        """
-        # farbe vom feld umaender muss im controller noch ausprogrammiert werden
-        if color == 'white':
-            cl = 1
-            element.changeColor ('black')
-        elif color == 'black':
-            cl = 0
-            element.changeColor ('yellow')
-        elif color == 'yellow':
-            cl = -1
-            element.changeColor ('white')
+        self.geklickteFelder_list = []
+        self.felderoffen
 
-        if self.spielfeld[row][col] == cl and element != 'black':
-            self.offen -= 1
+    def cell_was_clicked(self, row, column):
+        if [row, column] in self.geklickteFelder_list:
 
-    def losen(self):
-        print("Bitte loesen - Button wurde gedrueckt")
-        self.ansicht.setSpielfeld(self.spielfeld)
+            feld = self.ui.tableWidget.item(row, column).setBackground(QtGui.QColor(255, 255, 135))  # weiß
+            self.geklickteFelder_list.remove([row, column])
+            self.ui.tableWidget.item(row, column).setWhatsThis(_fromUtf8("0"))
+        else:
+            self.ui.tableWidget.setItem(row, column, QtGui.QTableWidgetItem())
+            feld = self.ui.tableWidget.item(row, column).setBackground(QtGui.QColor(81, 171, 255))  # blau
+            self.ui.tableWidget.item(row, column).setWhatsThis(_fromUtf8("1"))
+            self.geklickteFelder_list.append([row, column])
+        self.check(row, column)
 
-    def neues(self):
-        """
-        print("TEST")
+    def check(self, row, column):
+        lo = self.mo.getLosung()
+        if str(lo[row][column]) == str(self.ui.tableWidget.item(row, column).whatsThis()):
+            self.felderoffen -= 1
+            self.ui.lineEdit.setText("%s" % self.felderoffen)
 
-        View.tipsspalten = Model.getSpalten()
-        View.tipszeilen = Model.getZeilen()
-        # View.repaint()
-        View.spielfeld = Model.getPic(groesse)
-        """
+    def handlenew(self):
+        self.mo.getpic(15)
+        self.setSpalten(self.mo.getSpalten())
+        self.setZeilen(self.mo.getZeilen())
 
-        # algorithmus vorbereiten
-        self.mo.getpic(self.ansicht.getLevel())
-        self.hintspalte = self.mo.getSpalten()
-        self.hintzeile = self.mo.getZeilen()
+        self.ui.lineEdit.setText("%s" % self.mo.getOffen(15))
+        self.felderoffen = self.mo.getOffen(15)
+        for y in range(15):
+           for x in range(15):
+               self.ui.tableWidget.setItem(y, x, QtGui.QTableWidgetItem())
+               feld = self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(255, 255, 135))
 
-        #Werte in die GUI einfügen und spielfeld saubern
-        self.ansicht.clearFeld()
-        self.ansicht.setHintSpalte(self.hintspalte)
-        self.ansicht.setHintZeile(self.hintzeile)
+        index = self.ui.comboBox.currentIndex()
+        #print(index)
 
-        #print(self.ansicht.getLevel())
-        print("Neustart - Button wurde gedrückt")
+    def handlesolution(self):
+        losung = self.mo.getLosung()
+
+        for y in range(15):
+           for x in range(15):
+               self.ui.tableWidget.setItem(y, x, QtGui.QTableWidgetItem())
+               feld = self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(255, 255, 135))
+
+        for y in range(15):
+            for x in range(15):
+                if losung[y][x] == 0:
+                    self.ui.tableWidget.setItem(y, x, QtGui.QTableWidgetItem())
+                    self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(81,171,255)) #blau
+                    self.geklickteFelder_list = []
+                if losung[y][x] == 1:
+                    self.ui.tableWidget.setItem(y, x, QtGui.QTableWidgetItem())
+                    self.ui.tableWidget.item(y, x).setBackground(QtGui.QColor(255, 255, 135)) #gelb
+                    self.geklickteFelder_list = []
+
+    def setSpalten(self, ar):
+        for y in range(8):
+            #spaltenDaten[y].sort()
+            for x in range(15):
+                if ar[y][x] == 0:
+                    item = QtGui.QTableWidgetItem(" ")
+                else:
+                    item = QtGui.QTableWidgetItem("%s" % ar[y][x])
+                self.ui.tableWidget_3.setItem(y, x, item)
+                if x == 14:
+                    break
+
+    def setZeilen(self, ar):
+        for y in range(15):
+            #zeilenDaten[y].sort()
+            for x in range(8):
+                if ar[y][x] == 0:
+                    item = QtGui.QTableWidgetItem(" ")
+                else:
+                    item = QtGui.QTableWidgetItem("%s" % ar[y][x])
+                self.ui.tableWidget_2.setItem(y, x, item)
+                if x == 7:
+                    break
+
 
 #START:
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    ex = Ui_MainWindow()
+    ex = Spiel()
     ex.show()
     sys.exit(app.exec_())
