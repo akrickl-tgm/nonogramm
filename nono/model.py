@@ -8,7 +8,7 @@ class Model():
         """
         konstruktor zum setup der attribute
         """
-        self.losung
+        self.losung = None
         self.spalten = []
         self.zeilen = []
 

@@ -48,6 +48,9 @@ class Spiel(QtGui.QMainWindow):
         # spielfeld herrichten
         self.handlenew()
 
+        # textfeld auf nicht auswählbar setzen
+        self.ui.lineEdit.setEnabled(False)
+
         # attribute
         self.geklickteFelder_list = []
         self.felderoffen
