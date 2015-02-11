@@ -16,7 +16,9 @@ class Model():
         """
         berechnet ein neues spielfeld mit zufallszahlen und zaehlt dieses spielfeld anschließend
         fuer die tipps aus
-        :param breite: breite des spielfelds
+
+        :param breite:  breite des spielfelds
+
         """
         #spielfeld generieren mit random zahlen in einem 2d array
         spielfeld = [[0 for x in range(breite)] for x in range(breite)]
@@ -53,8 +55,10 @@ class Model():
     def getOffen(self, breite):
         """
         zaehlt die offenen (blauen bzw 1) felder aus
-        :param breite: breite des spielfelds
-        :return: die anzahl der offenen felder
+
+        :param breite:  breite des spielfelds
+
+        :return zaehler:    die anzahl der offenen felder
         """
         spielfeld = self.getLosung()
         zahler = 0
@@ -68,20 +72,23 @@ class Model():
     def getLosung(self):
         """
         gibt die losung also das spielfeld zuruck
-        :return: array des spielfelds
+
+        :return losung: array des spielfelds
         """
         return self.losung
 
     def getSpalten(self):
         """
-        gibt die tips der spalten zuruck
-        :return: tipps der spalten
+        Gibt die tips der spalten zuruck
+
+        :return spalten:    tipps der spalten
         """
         return self.spalten
 
     def getZeilen(self):
         """
         gibt die tipps der zeilen zuruck
-        :return: tipps der zeilen
+
+        :return zeilen: tipps der zeilen
         """
         return self.zeilen

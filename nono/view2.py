@@ -26,6 +26,12 @@ except AttributeError:
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        """
+        Richtet das User Interface welches durch Designer erstellt wurde ein.
+
+        :param MainWindow: Das Hauptfenster der Anwendung(GUI)
+
+        """
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(1054, 700)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
@@ -636,6 +642,12 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        """
+        Updatet das UI bei Änderungen durch bestimmte Auslöser wie Mausklick
+
+        :param MainWindow: Das Hauptfenster der Anwendung(GUI)
+
+        """
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.tableWidget.setSortingEnabled(False)
         self.tableWidget_2.setSortingEnabled(False)

@@ -61,8 +61,10 @@ class Spiel(QtGui.QMainWindow):
         """
         wenn eine Zelle des Spielfelds angeklickt wurde wird diese methode aufgerufen, die dann
         die zelle entsprechend einfaerbt
+
         :param row: reihe der zelle
-        :param column: spalte der zelle
+
+        :param column:  spalte der zelle
         """
         if [row, column] in self.geklickteFelder_list:
 
@@ -79,8 +81,11 @@ class Spiel(QtGui.QMainWindow):
     def check(self, row, column):
         """
         checkt ob der zug richtig war
+
         :param row: reihe des gewaehlten elements
-        :param column: spalte des gewaehlten elements
+
+        :param column:  spalte des gewaehlten elements
+
         """
         lo = self.mo.getLosung()
         if str(lo[row][column]) == str(self.ui.tableWidget.item(row, column).whatsThis()):
@@ -125,7 +130,6 @@ class Spiel(QtGui.QMainWindow):
         """
         handling fuer den losungs button
         projeziert die losung auf die spielflaeche
-        :return:
         """
         losung = self.mo.getLosung()
         self.ui.tableWidget.setEnabled(False)
@@ -148,7 +152,8 @@ class Spiel(QtGui.QMainWindow):
     def setSpalten(self, ar):
         """
         setzt die nummern der spalten tipps auf die GUI
-        :param ar: array mit den zahlen in entsprechendem format
+
+        :param ar:  array mit den zahlen in entsprechendem format
         """
         for y in range(8):
             #spaltenDaten[y].sort()
@@ -164,7 +169,9 @@ class Spiel(QtGui.QMainWindow):
     def setZeilen(self, ar):
         """
         setzt die nummern der zeilen tipps auf die GUI
-        :param ar: array mit den zahlen in entsprechendem format
+
+        :param ar:  array mit den zahlen in entsprechendem format
+
         """
         for y in range(15):
             #zeilenDaten[y].sort()

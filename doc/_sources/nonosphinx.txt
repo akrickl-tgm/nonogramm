@@ -1,0 +1,7 @@
+Controller
+=================
+Hier Beschreibung
+
+.. py:module:: nono.control
+.. autoclass:: Spiel
+	:members:
